@@ -1,3 +1,5 @@
+import { db } from "~/server/db";
+
 const mockUrls = [
   "https://ewpy7eni1f.ufs.sh/f/2Xwpxzi4mQ5K0KYKN1PJcG4DU86pS9xQEbzjeBoL3ryXA1t2",
   "https://ewpy7eni1f.ufs.sh/f/2Xwpxzi4mQ5KDvPZZXEO4n7FURTqJQ9rCWjdEODlyZ0SohHs",
@@ -10,12 +12,20 @@ const mockImages = mockUrls.map((url, index) => ({
   url,
 }));
 
-export default function HomePage() {
+export default async function HomePage() {
+
+  const posts = await db.query.posts.findMany();
+
   return (
     <main className="">
       <div className="flex flex-wrap gap-4">
-        {[...mockImages, ...mockImages, ...mockImages].map((image) => (
-          <div key={image.id} className="w-48">
+        {posts.map((post) => (
+          <div key={post.id}>
+            {post.name}
+          </div>
+        ))}
+        {[...mockImages, ...mockImages, ...mockImages].map((image, index) => (
+          <div key={image.id + "-" + index} className="w-48">
             <img src={image.url} />
           </div>
         ))}
