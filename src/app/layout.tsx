@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body className={`font-sans ${inter.variable} flex flex-col gap-4`}>
+        <body className={`font-sans ${inter.variable} flex flex-col gap-4 dark`}>
           <NextSSRPlugin
             /**
              * The `extractRouterConfig` will extract **only** the route configs
